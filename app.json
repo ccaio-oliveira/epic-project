@@ -1,16 +1,11 @@
 {
   "expo": {
-    "name": "project-epic",
-    "slug": "project-epic",
+    "name": "projeto-epic",
+    "slug": "projeto-epic",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -28,6 +23,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "splash": {
+      "image": "./assets/epic-games-logo.png",
+      "backgroundColor": "#000000"
     }
   }
 }
