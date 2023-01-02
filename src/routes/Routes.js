@@ -1,6 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import Store from "../components/Store/Store";
 import Home from '../components/Home/Home';
 
 const Drawer = createDrawerNavigator();
