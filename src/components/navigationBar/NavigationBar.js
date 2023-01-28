@@ -18,7 +18,7 @@ export default () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#121212',
+        backgroundColor: '#202020',
         paddingLeft: 20,
         flexDirection: "row",
         justifyContent: "space-between",
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     },
     backMenu: {
         backgroundColor: '#0078F2',
-        height: 50,
-        width: 50,
+        height: 59,
+        width: 59,
         justifyContent: "center",
         alignItems: "center",
         padding: 5

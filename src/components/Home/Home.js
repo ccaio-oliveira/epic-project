@@ -6,9 +6,23 @@ import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 
 export default () => {
+    // variáveis de estilo da parte de pesquisa
+    const [searchView, setSearchView] = useState(false);
+    const [styleSearchView, setStyleSearchView] = useState(styles.searchBar)
+    // variáveis de estilo da parte do dropdown descobrir
     const [visDrop, setVisDrop] = useState(false);
     const [arrowDrop, setArrowDrop] = useState('down');
     const navigation = useNavigation();
+
+    const visibilitySearch = () => {
+        if(searchView === true){
+            setStyleSearchView(styles.searchBar);
+            setSearchView(false);
+        } else {
+            setStyleSearchView(styles.searchVisBar);
+            setSearchView(true);
+        }
+    }
 
     const visibilityDrop = () => {
         if(visDrop === true){
@@ -24,16 +38,25 @@ export default () => {
         <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
             <View>
                 <NavigationBar />
-                <View style={styles.searchBar}>
+                <View style={styleSearchView}>
                     <View style={styles.searchInpView}>
-                        <FontAwesome name="search" size={24} color="#000" onPress={() => searchInpOpen()} style={styles.searchIcon} />
+                        <FontAwesome name="search" size={24} color="#FFF" onPress={() => visibilitySearch()} style={styles.searchIcon} />
+                        {searchView && (
+                            <>
+                                <TextInput placeholder="Pesquisar loja" placeholderTextColor="#FFF" style={styles.searchInput} />
+                                <AntDesign name="close" size={24} color="#FFF" onPress={() => visibilitySearch()} />
+                            </>
+                            
+                        )}
                     </View>
-                    <View style={styles.discoverView}>
-                        <TouchableOpacity style={styles.discDrop} onPress={() => visibilityDrop()}>
-                            <Text style={{ fontSize: 16, marginRight: 7 }}>Descobrir</Text>
-                            <AntDesign name={arrowDrop} size={18} color="black" />
-                        </TouchableOpacity>
-                    </View>
+                    {!searchView && (
+                        <View style={styles.discoverView}>
+                            <TouchableOpacity style={styles.discDrop} onPress={() => visibilityDrop()}>
+                                <Text style={{ fontSize: 16, marginRight: 7, color: '#fff' }}>Descobrir</Text>
+                                <AntDesign name={arrowDrop} size={18} color="#FFF" />
+                            </TouchableOpacity>
+                        </View>
+                    )}
                 </View>
             </View>
         </ScrollView>
@@ -47,13 +70,24 @@ const styles = StyleSheet.create({
     },
     searchBar: {
         padding: 20,
-        backgroundColor: '#fff',
+        backgroundColor: '#000',
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    searchVisBar: {
+        backgroundColor: '#202020',
+        padding: 20,
         flexDirection: "row",
         justifyContent: "space-between"
     },
     searchInpView: {
-        borderColor: 'red',
-        borderWidth: 1
+        flexDirection: "row",
+        flex: 1
+    },
+    searchInput: {
+        marginLeft: 20,
+        color: '#fff',
+        width: '77%'
     },
     discDrop: {
         flexDirection: "row",
