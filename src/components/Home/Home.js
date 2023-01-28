@@ -15,7 +15,7 @@ export default () => {
     const navigation = useNavigation();
 
     const visibilitySearch = () => {
-        if(searchView === true){
+        if (searchView === true) {
             setStyleSearchView(styles.searchBar);
             setSearchView(false);
         } else {
@@ -25,7 +25,7 @@ export default () => {
     }
 
     const visibilityDrop = () => {
-        if(visDrop === true){
+        if (visDrop === true) {
             setVisDrop(false);
             setArrowDrop('up');
         } else {
@@ -46,16 +46,21 @@ export default () => {
                                 <TextInput placeholder="Pesquisar loja" placeholderTextColor="#FFF" style={styles.searchInput} />
                                 <AntDesign name="close" size={24} color="#FFF" onPress={() => visibilitySearch()} />
                             </>
-                            
+
                         )}
                     </View>
                     {!searchView && (
-                        <View style={styles.discoverView}>
-                            <TouchableOpacity style={styles.discDrop} onPress={() => visibilityDrop()}>
-                                <Text style={{ fontSize: 16, marginRight: 7, color: '#fff' }}>Descobrir</Text>
-                                <AntDesign name={arrowDrop} size={18} color="#FFF" />
-                            </TouchableOpacity>
-                        </View>
+                        <>
+                            <View style={styles.discoverView}>
+                                <TouchableOpacity style={styles.discDrop} onPress={() => visibilityDrop()}>
+                                    <Text style={{ fontSize: 16, marginRight: 7, color: '#fff' }}>Descobrir</Text>
+                                    <AntDesign name={arrowDrop} size={18} color="#FFF" />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.wishCartView}>
+                                <Text>Carrinho</Text>
+                            </View>
+                        </>
                     )}
                 </View>
             </View>
@@ -81,13 +86,12 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     searchInpView: {
-        flexDirection: "row",
-        flex: 1
+        flexDirection: "row"
     },
     searchInput: {
         marginLeft: 20,
         color: '#fff',
-        width: '77%'
+        width: '79%'
     },
     discDrop: {
         flexDirection: "row",
