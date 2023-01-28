@@ -8,8 +8,10 @@ export default () => {
 
     return(
         <View style={styles.container}>
-            <Image style={styles.logoImg} source={require('../../../assets/epic-games-logo.png')} />
-            <Feather name="menu" size={24} color="white" onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />
+            <Image style={styles.logoImg} source={require('../../../assets/epic-games-logo.png')} onPress={() => navigation.navigate('Home')} />
+            <View style={styles.backMenu}>
+                <Feather name="menu" size={40} color="white" onPress={() => navigation.dispatch(DrawerActions.openDrawer())} />
+            </View>
         </View>
     )
 }
@@ -17,15 +19,23 @@ export default () => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#121212',
-        padding: 20,
+        paddingLeft: 20,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight: 0,
     },
     logoImg: {
-        width: 50,
+        width: 40,
+        height: 40,
+        marginVertical: 10,
+    },
+    backMenu: {
+        backgroundColor: '#0078F2',
         height: 50,
-        marginTop: 10
+        width: 50,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 5
     }
 })
