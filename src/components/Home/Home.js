@@ -1,23 +1,23 @@
-import { Text, View, StyleSheet, ScrollView, TextInput } from "react-native"
+import { Text, View, StyleSheet, ScrollView, TextInput, TouchableOpacity } from "react-native"
 import { useNavigation } from '@react-navigation/native';
 import NavigationBar from "../navigationBar/NavigationBar";
 import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
 
 export default () => {
-    const [searchGame, setSearchGame] = useState();
-    const [ifClickSearch, setIfClickSearch] = useState(false);
-    const [colorSearchIcon, setColorSearchIcon] = useState('#fff');
+    const [visDrop, setVisDrop] = useState(false);
+    const [arrowDrop, setArrowDrop] = useState('down');
     const navigation = useNavigation();
 
-    const searchInpOpen = () => {
-        setIfClickSearch(true);
-        setColorSearchIcon('#000');
-    }
-
-    const searchInpClose = () => {
-        setIfClickSearch(false);
-        setColorSearchIcon('#fff');
+    const visibilityDrop = () => {
+        if(visDrop === true){
+            setVisDrop(false);
+            setArrowDrop('up');
+        } else {
+            setVisDrop(true);
+            setArrowDrop('down');
+        }
     }
 
     return (
@@ -26,13 +26,13 @@ export default () => {
                 <NavigationBar />
                 <View style={styles.searchBar}>
                     <View style={styles.searchInpView}>
-                        <FontAwesome name="search" size={24} color={colorSearchIcon} onPress={() => searchInpOpen()} style={styles.searchIcon} />
-                        {ifClickSearch && (
-                            <TextInput value={searchGame} placeholder="Pesquisar loja" style={styles.searchInput} />
-                        )}
-                        {ifClickSearch && (
-                            <FontAwesome name="close" size={24} color="black" style={styles.searchIconClose} onPress={() => searchInpClose()} />
-                        )}
+                        <FontAwesome name="search" size={24} color="#000" onPress={() => searchInpOpen()} style={styles.searchIcon} />
+                    </View>
+                    <View style={styles.discoverView}>
+                        <TouchableOpacity style={styles.discDrop} onPress={() => visibilityDrop()}>
+                            <Text style={{ fontSize: 16, marginRight: 7 }}>Descobrir</Text>
+                            <AntDesign name={arrowDrop} size={18} color="black" />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -46,32 +46,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     searchBar: {
-        flexDirection: "row",
-        justifyContent: "space-between",
         padding: 20,
-        position: "relative"
+        backgroundColor: '#fff',
+        flexDirection: "row",
+        justifyContent: "space-between"
     },
     searchInpView: {
+        borderColor: 'red',
+        borderWidth: 1
+    },
+    discDrop: {
         flexDirection: "row",
-        padding: 10
-    },
-    searchIcon: {
-        position: "absolute",
-        left: 15,
-        top: 15,
-        zIndex: 3
-    },
-    searchInput: {
-        backgroundColor: "#FCFCFC",
-        width: "90%",
-        padding: 5,
-        borderRadius: 10,
-        paddingHorizontal: 35
-    },
-    searchIconClose: {
-        position: "relative",
-        right: 30,
-        top: 5,
-        zIndex: 3
+        alignItems: "center"
     }
 })
