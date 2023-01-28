@@ -12,6 +12,11 @@ export default () => {
     // variáveis de estilo da parte do dropdown descobrir
     const [visDrop, setVisDrop] = useState(false);
     const [arrowDrop, setArrowDrop] = useState('down');
+    // variaveis para configurar o conteudo principal
+    const [titleMainContent, setTitleMainContent] = useState('Descobrir');
+    const [colorDesc, setColorDesc] = useState('#8a8488');
+    const [colorNav, setColorNav] = useState('#8a8488');
+    const [colorNov, setColorNov] = useState('#8a8488');
     const navigation = useNavigation();
 
     const visibilitySearch = () => {
@@ -34,6 +39,25 @@ export default () => {
         }
     }
 
+    const changeMainContent = (atual) => {
+        if(atual === 'Descobrir'){
+            setTitleMainContent('Descobrir');
+            setColorDesc('#FFF');
+            setColorNav('#8a8488');
+            setColorNov('#8a8488');
+        } else if(atual === 'Navegar'){
+            setTitleMainContent('Navegar');
+            setColorNav('#FFF');
+            setColorDesc('#8a8488');
+            setColorNov('#8a8488');
+        } else {
+            setTitleMainContent('Novidades');
+            setColorNav('#8a8488');
+            setColorDesc('#8a8488');
+            setColorNov('#FFF');
+        }
+    }
+
     return (
         <ScrollView style={styles.container} stickyHeaderIndices={[0]}>
             <View>
@@ -53,7 +77,7 @@ export default () => {
                         <>
                             <View style={styles.discoverView}>
                                 <TouchableOpacity style={styles.discDrop} onPress={() => visibilityDrop()}>
-                                    <Text style={{ fontSize: 16, marginRight: 7, color: '#fff' }}>Descobrir</Text>
+                                    <Text style={{ fontSize: 16, marginRight: 7, color: '#fff' }}>{titleMainContent}</Text>
                                     <AntDesign name={arrowDrop} size={18} color="#FFF" />
                                 </TouchableOpacity>
                             </View>
@@ -64,6 +88,21 @@ export default () => {
                     )}
                 </View>
             </View>
+            <View style={styles.mainContent}>
+                {!visDrop && (
+                    <View style={styles.dropContent}>
+                        <TouchableOpacity style={{ paddingVertical: 15, borderBottomColor: '#8a8488', borderBottomWidth: 1}} onPress={() => changeMainContent('Descobrir')}>
+                            <Text style={{ color: colorDesc, fontSize: 18 }}>Descobrir</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ paddingVertical: 15, borderBottomColor: '#8a8488', borderBottomWidth: 1}} onPress={() => changeMainContent('Navegar')}>
+                            <Text style={{ color: colorNav, fontSize: 18 }}>Navegar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ paddingVertical: 15, paddingBottom: 30 }} onPress={() => changeMainContent('Novidades')}>
+                            <Text style={{ color: colorNov, fontSize: 18 }}>Novidades</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+            </View>
         </ScrollView>
     )
 }
@@ -73,9 +112,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         flex: 1,
     },
+    mainContent: {
+    },
     searchBar: {
         padding: 20,
-        backgroundColor: '#000',
+        backgroundColor: '#121212',
         flexDirection: "row",
         justifyContent: "space-between"
     },
@@ -96,5 +137,12 @@ const styles = StyleSheet.create({
     discDrop: {
         flexDirection: "row",
         alignItems: "center"
+    },
+    dropContent: {
+        position: "relative",
+        zIndex: 1,
+        backgroundColor: '#121212',
+        paddingHorizontal: 20,
+        paddingTop: 40
     }
 })
