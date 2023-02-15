@@ -4,6 +4,10 @@ import NavigationBar from "../navigationBar/NavigationBar";
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { useState } from "react";
+import MainContent from "../MainContent/MainContent";
+import Find from "../MainContent/Find/Find";
+import Navegar from "../MainContent/Navegar/Navegar";
+import Novidades from "../MainContent/Novidades/Novidades";
 
 export default () => {
     // variáveis de estilo da parte de pesquisa
@@ -17,6 +21,7 @@ export default () => {
     const [colorDesc, setColorDesc] = useState('#8a8488');
     const [colorNav, setColorNav] = useState('#8a8488');
     const [colorNov, setColorNov] = useState('#8a8488');
+    const [itemMainContent, setItemMainContent] = useState(<Find />);
     const navigation = useNavigation();
 
     const visibilitySearch = () => {
@@ -40,21 +45,29 @@ export default () => {
     }
 
     const changeMainContent = (atual) => {
-        if(atual === 'Descobrir'){
+        if (atual === 'Descobrir') {
+            setItemMainContent(<Find />);
             setTitleMainContent('Descobrir');
             setColorDesc('#FFF');
             setColorNav('#8a8488');
             setColorNov('#8a8488');
-        } else if(atual === 'Navegar'){
+        } else if (atual === 'Navegar') {
+            setItemMainContent(<Navegar />);
             setTitleMainContent('Navegar');
             setColorNav('#FFF');
             setColorDesc('#8a8488');
             setColorNov('#8a8488');
-        } else {
+        } else if (atual == 'Novidades') {
+            setItemMainContent(<Novidades />);
             setTitleMainContent('Novidades');
             setColorNav('#8a8488');
             setColorDesc('#8a8488');
             setColorNov('#FFF');
+        } else if (atual == 'Lista de desejos') {
+            setItemMainContent(<Find />);
+            setColorNav('#8a8488');
+            setColorDesc('#8a8488');
+            setColorNov('#8a8488');
         }
     }
 
@@ -82,7 +95,12 @@ export default () => {
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.wishCartView}>
-                                <Text>Carrinho</Text>
+                                <TouchableOpacity onPress={() => changeMainContent('Lista de desejos')}>
+                                    <AntDesign name="checkcircleo" size={18} color="white" style={{marginRight: 20}} />
+                                </TouchableOpacity>
+                                <TouchableOpacity>
+                                    <AntDesign name="shoppingcart" size={18} color="white" />
+                                </TouchableOpacity>
                             </View>
                         </>
                     )}
@@ -91,10 +109,10 @@ export default () => {
             <View style={styles.mainContent}>
                 {!visDrop && (
                     <View style={styles.dropContent}>
-                        <TouchableOpacity style={{ paddingVertical: 15, borderBottomColor: '#8a8488', borderBottomWidth: 1}} onPress={() => changeMainContent('Descobrir')}>
+                        <TouchableOpacity style={{ paddingVertical: 15, borderBottomColor: '#8a8488', borderBottomWidth: 1 }} onPress={() => changeMainContent('Descobrir')}>
                             <Text style={{ color: colorDesc, fontSize: 18 }}>Descobrir</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ paddingVertical: 15, borderBottomColor: '#8a8488', borderBottomWidth: 1}} onPress={() => changeMainContent('Navegar')}>
+                        <TouchableOpacity style={{ paddingVertical: 15, borderBottomColor: '#8a8488', borderBottomWidth: 1 }} onPress={() => changeMainContent('Navegar')}>
                             <Text style={{ color: colorNav, fontSize: 18 }}>Navegar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ paddingVertical: 15, paddingBottom: 30 }} onPress={() => changeMainContent('Novidades')}>
@@ -102,6 +120,7 @@ export default () => {
                         </TouchableOpacity>
                     </View>
                 )}
+                <MainContent element={itemMainContent} />
             </View>
         </ScrollView>
     )
@@ -109,7 +128,7 @@ export default () => {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#000',
+        backgroundColor: '#121212',
         flex: 1,
     },
     mainContent: {
@@ -139,10 +158,12 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     dropContent: {
-        position: "relative",
-        zIndex: 1,
+        zIndex: 10,
         backgroundColor: '#121212',
         paddingHorizontal: 20,
-        paddingTop: 40
+        paddingTop: 0,
+    },
+    wishCartView: {
+        flexDirection: "row"
     }
 })
