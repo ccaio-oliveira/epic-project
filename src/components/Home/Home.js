@@ -14,7 +14,7 @@ export default () => {
     const [searchView, setSearchView] = useState(false);
     const [styleSearchView, setStyleSearchView] = useState(styles.searchBar)
     // variáveis de estilo da parte do dropdown descobrir
-    const [visDrop, setVisDrop] = useState(false);
+    const [visDrop, setVisDrop] = useState(true);
     const [arrowDrop, setArrowDrop] = useState('down');
     // variaveis para configurar o conteudo principal
     const [titleMainContent, setTitleMainContent] = useState('Descobrir');
@@ -28,9 +28,13 @@ export default () => {
         if (searchView === true) {
             setStyleSearchView(styles.searchBar);
             setSearchView(false);
+            setVisDrop(true);
+            setArrowDrop('down');
         } else {
             setStyleSearchView(styles.searchVisBar);
             setSearchView(true);
+            setVisDrop(true);
+            setArrowDrop('down');
         }
     }
 
