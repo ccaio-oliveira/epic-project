@@ -1,9 +1,15 @@
-import { Text, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 
 export default () => {
     return(
-        <View>
-            <Text style={{color: '#fff'}}>Descobrir</Text>
+        <View style={styles.container}>
+            <Text style={{color: '#fff'}}>suave na nave</Text>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        
+    }
+})

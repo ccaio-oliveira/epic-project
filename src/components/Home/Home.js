@@ -55,23 +55,27 @@ export default () => {
             setColorDesc('#FFF');
             setColorNav('#8a8488');
             setColorNov('#8a8488');
+            visibilityDrop();
         } else if (atual === 'Navegar') {
             setItemMainContent(<Navegar />);
             setTitleMainContent('Navegar');
             setColorNav('#FFF');
             setColorDesc('#8a8488');
             setColorNov('#8a8488');
+            visibilityDrop();
         } else if (atual == 'Novidades') {
             setItemMainContent(<Novidades />);
             setTitleMainContent('Novidades');
             setColorNav('#8a8488');
             setColorDesc('#8a8488');
             setColorNov('#FFF');
+            visibilityDrop();
         } else if (atual == 'Lista de desejos') {
             setItemMainContent(<Find />);
             setColorNav('#8a8488');
             setColorDesc('#8a8488');
             setColorNov('#8a8488');
+            visibilityDrop();
         }
     }
 
