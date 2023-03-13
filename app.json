@@ -21,9 +21,6 @@
         "backgroundColor": "#FFFFFF"
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "splash": {
       "image": "./assets/epic-games-logo.png",
       "backgroundColor": "#000000"

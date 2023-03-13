@@ -27,7 +27,7 @@ export default () => {
                 autoPlayInterval={1500}
                 scrollAnimationDuration={1000}
                 renderItem={({ index }) => (
-                    <View>
+                    <View style={{width: '90%'}}>
                         <Image style={{width: '100px'}} source={imageSource[index].image} />
                         <Text style={{color: '#fff'}}>{imageSource[1].title}</Text>
                     </View>
